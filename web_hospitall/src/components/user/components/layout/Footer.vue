@@ -11,7 +11,7 @@
                     <li>Công ty Cổ phần Công nghệ BookingCare</li>
                     <li>
                         <i class='bx bx-current-location'></i>
-                        <p>28 Thành Thái, Dịch Vọng, Cầu Giấy, Hà Nội</p>
+                        <p>276-278-280 Đống Đa, Đà Nẵng</p>
                     </li>
                     <li>
                         <i class="bx bx-check"></i>
@@ -44,8 +44,8 @@
                 </ul>
                 <ul>
                     <li>
-                        <h4>Trụ sở tại Hà Nội</h4>
-                        <p>28 Thành Thái, Dịch Vọng, Cầu Giấy, Hà Nội</p>
+                        <h4>Trụ sở tại Quảng Ngãi</h4>
+                        <p>168 Hùng Vương, TP. Quảng Ngãi</p>
                     </li>
                     <li>
                         <h4>Trụ sở tại Hà Nội</h4>

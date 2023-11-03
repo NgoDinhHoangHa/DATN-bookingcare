@@ -42,9 +42,9 @@
                     </div>
                     <div class="" style="flex: 1;flex-wrap: wrap;">
                         <ul class="col-12">
-                            <li>ĐỊA CHỈ KHÁM</li>
-                            <li>Bệnh viện Ung bướu Hưng Việt</li>
-                            <li>34 Đại Cồ Việt, Hai Bà Trưng, Hà Nội</li>
+                            <li>ĐỊA CHỈ KHÁM BỆNH</li>
+                            <li>Bệnh viện Đa Khoa Quận Hải Châu</li>
+                            <li>38 Cao Thắng, Hải Châu, TP Đà Nẵng</li>
                         </ul>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
             <div class="wrapper">
                 <div class="reply">
                     <p class="reply__title">
-                        Phản hồi của bệnh nhân sau khi đi khám
+                        Phản hồi của bệnh nhân sau quá trình khám chữa bệnh
                     </p>
                     <div v-if="replies.length > 0">
                         <ItemReplyBookList v-for="item in replies" :key="item.id" :item="item" />

@@ -1,7 +1,7 @@
 <template>
     <div class="banner">
         <div class="banner__image img-wrap">
-            <img src="@/assets/img/banner/banner.jpg" alt="">
+            <img src="@/assets/img/banner/bb.jpg" alt="">
         </div>
         <div class="banner__search">
             <h2>NỀN TẢNG Y TẾ</h2>

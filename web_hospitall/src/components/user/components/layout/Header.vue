@@ -6,7 +6,7 @@
             </div>
             <div class="header__logo">
                 <router-link :to="{ name: 'User_Home' }">
-                    <img src="@/assets/img/logo/logo.svg" alt="" srcset="">
+                    <img src="@/assets/img/banner/doctor.png" alt="" srcset="">
                 </router-link>
             </div>
             <ul class="header__list">

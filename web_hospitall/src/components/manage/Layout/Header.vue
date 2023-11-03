@@ -3,7 +3,7 @@
         <div class="admin__header">
             <div class="admin__header--logo">
                 <a href="">
-                    <img src="@/assets/img/logo/logo.svg" alt="MH CARE">
+                    <img src="@/assets/img/logo/logo.svg" alt="HH CARE">
                 </a>
                 <span class="bx bx-menu box-icon" @click="toggleMenu"></span>
             </div>
