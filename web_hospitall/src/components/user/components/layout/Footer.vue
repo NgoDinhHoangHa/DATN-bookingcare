@@ -11,11 +11,11 @@
                     <li>Công ty Cổ phần Công nghệ BookingCare</li>
                     <li>
                         <i class='bx bx-current-location'></i>
-                        <p>276-278-280 Đống Đa, Đà Nẵng</p>
+                        <p>48  Cao Thắng , Đà Nẵng</p>
                     </li>
                     <li>
                         <i class="bx bx-check"></i>
-                        <p>ĐKKD số: 0106790291. Sở KHĐT Hà Nội cấp ngày 16/03/2015</p>
+                        <p>ĐKKD số: 0106790291. Sở KHĐT Đà Nẵng cấp ngày 11/11/2013</p>
                     </li>
                     <li>
                         <img src="https://bookingcare.vn/assets/icon/bo-cong-thuong.svg" alt="">
@@ -44,16 +44,16 @@
                 </ul>
                 <ul>
                     <li>
-                        <h4>Trụ sở tại Quảng Ngãi</h4>
-                        <p>168 Hùng Vương, TP. Quảng Ngãi</p>
+                        <h4>Trụ sở tại Đà Nẵng</h4>
+                        <p>48 Cao Thắng, TP. Quảng Ngãi</p>
                     </li>
                     <li>
-                        <h4>Trụ sở tại Hà Nội</h4>
-                        <p>28 Thành Thái, Dịch Vọng, Cầu Giấy, Hà Nội</p>
+                        <h4>Trụ sở tại Đà Nẵng</h4>
+                        <p>48 Cao Thắng, TP. Quảng Ngãi</p>
                     </li>
                     <li>
-                        <h4>Trụ sở tại Hà Nội</h4>
-                        <p>28 Thành Thái, Dịch Vọng, Cầu Giấy, Hà Nội</p>
+                        <h4>Trụ sở tại Đà Nẵng</h4>
+                        <p>48 Cao Thắng, TP. Quảng Ngãi</p>
                     </li>
                 </ul>
             </div>
