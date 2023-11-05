@@ -71,7 +71,7 @@
                         <ItemReplyBookList v-for="item in replies" :key="item.id" :item="item" />
                     </div>
                     <div v-else class="loading__content">
-                        Chưa có bất kì phản hồi nào.
+                        Chưa có bất kì phản hồi nào từ người khám.
                     </div>
                 </div>
             </div>

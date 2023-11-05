@@ -20,7 +20,7 @@
                 </ItemDoctor>
             </div>
             <div v-else class="loading__content">
-                Không có bác sĩ nào ở chuyên khoa này.
+                Không tìm thấy bác sĩ nào ở chuyên khoa này.
             </div>
         </div>
         <div v-else class="loading__content">
