@@ -77,17 +77,17 @@ class C_specical_list extends Controller
         ]);
     }
 
-    public function deleteSpecicalList(Request $request)
-    {
-        $mSpecicalList = DB::select("SELECT * FROM m_specical_lists WHERE id = ?", [$request->id]);
-        if (sizeof($mSpecicalList) > 0) {
-            if (File::exists(public_path('images/' . $mSpecicalList[0]->thumbnail))) {
-                File::delete(public_path('images/' . $mSpecicalList[0]->thumbnail));
-            }
-        }
-        DB::delete("DELETE FROM m_specical_lists WHERE id = '" . $request->id . "'");
-        return response()->json([
-            'status' => true
-        ]);
-    }
+    // public function deleteSpecicalList(Request $request)
+    // {
+    //     $mSpecicalList = DB::select("SELECT * FROM m_specical_lists WHERE id = ?", [$request->id]);
+    //     if (sizeof($mSpecicalList) > 0) {
+    //         if (File::exists(public_path('images/' . $mSpecicalList[0]->thumbnail))) {
+    //             File::delete(public_path('images/' . $mSpecicalList[0]->thumbnail));
+    //         }
+    //     }
+    //     DB::delete("DELETE FROM m_specical_lists WHERE id = '" . $request->id . "'");
+    //     return response()->json([
+    //         'status' => true
+    //     ]);
+    // }
 }

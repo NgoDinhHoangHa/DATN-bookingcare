@@ -48,10 +48,10 @@ class C_time_doctor extends Controller
         return response()->json(['data' => sizeof($result) === 0 ? null : $result[0]]);
     }
 
-    public function deleteTimeDoctor(Request $request)
-    {
-        $result = DB::delete('DELETE FROM m_time_doctors WHERE m_time_doctors.day = ? AND m_time_doctors.month = ? AND 
-        m_time_doctors.year = ? ', [$request->day, $request->month, $request->year]);
-        return response()->json(['data' => $result]);
-    }
+    // public function deleteTimeDoctor(Request $request)
+    // {
+    //     $result = DB::delete('DELETE FROM m_time_doctors WHERE m_time_doctors.day = ? AND m_time_doctors.month = ? AND 
+    //     m_time_doctors.year = ? ', [$request->day, $request->month, $request->year]);
+    //     return response()->json(['data' => $result]);
+    // }
 }
