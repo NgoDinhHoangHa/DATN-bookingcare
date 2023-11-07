@@ -16,9 +16,10 @@ class C_time_book extends Controller
         ]);
     }
 
-    public function searchTimeBook(Request $request) {
+    public function searchTimeBook(Request $request)
+    {
         $result = DB::select("SELECT * FROM m_time_books WHERE time LIKE '%" . $request->value . "%'");
-        return response()->json(['data'=>$result]);
+        return response()->json(['data' => $result]);
     }
 
     public function getTimeBookById(Request $request)
@@ -54,5 +55,8 @@ class C_time_book extends Controller
         return response()->json([
             'status' => true
         ]);
+    }
+    public function addBook()
+    {
     }
 }
