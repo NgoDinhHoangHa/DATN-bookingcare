@@ -14,11 +14,13 @@
     "moment-timezone": "^0.5.34",
     "socket.io": "^4.5.1",
     "socket.io-client": "^4.5.1",
+    "unoverlay-vue": "^0.3.0",
     "uuid": "^8.3.2",
     "vue": "^3.0.0",
     "vue-axios": "^3.4.1",
     "vue-router": "^4.0.15",
     "vue3-editor": "^0.1.1",
+    "vue3-promise-dialog": "^0.3.4",
     "vuex": "^4.0.2"
   },
   "devDependencies": {

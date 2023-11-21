@@ -1,4 +1,6 @@
 <template>
+  
+      
     <Base :onInput="onInput" :optional="[
         { id: 'all', name: 'Tất cả', color: 'black', value: null },
         { id: 1, name: 'Đã huỷ', color: 'gray', value: -1 },
@@ -8,7 +10,7 @@
         { id: 5, name: 'Đã phản hồi', color: 'orange', value: 3 },
     ]" :handleOptional="(item) => { this.optionalActive = item }" :optionalActive="optionalActive">
     <Table :hideCrud="true" :title="'Danh sách lịch đặt khám'" :heading="['Tên khách hàng', 'Số điện thoại', 'Email', 'Tên bác sĩ', 'Giờ khám',
-    'Ngày khám', 'Thời gian đặt', 'Tình trạng', 'Sửa']" :list="list" :loading="loading">
+    'Ngày khám', 'Thời gian đặt', 'Tình trạng', 'Sửa','Lịch sử bệnh án']" :list="list" :loading="loading">
         <tr v-for="(item, index) in (
             optionalActive.id === 'all' ? list : list.filter(dt => dt.status_book_list == optionalActive.value)
         )" :key="item.id">
@@ -40,6 +42,8 @@
             <td>
                 <span @click="editItem(item.idbooklist_main, item.status_book_list)" class="bx bx-pencil"
                     :class="item.status_book_list === -1 || item.status_book_list === 2 || item.status_book_list === 3 ? 'disabled' : ''"></span>
+            </td>            <td>
+                <span @click="editItem2()" class="bx bx-show"></span>
             </td>
         </tr>
     </Table>
@@ -48,10 +52,14 @@
     { id: 2, name: 'Đã khám', status: 2, hide: status == 0 }]" table="booklist" :setList="setList"
         name="booklist-status" title="Lịch đặt khám" :id="id" :status="status">
     </ModalOptionData>
+   
+   
+   
     </Base>
 </template>
 <script>
 import Base from "./Base.vue";
+// import Popup from "./abcn.vue";
 import Table from "../Table.vue";
 import ItemStatus from '../../user/components/ItemComponent/ItemStatus.vue';
 import Request from "../../../Request";
@@ -94,6 +102,11 @@ export default {
                 this.setModal({ ...this.modal, data: true })
             }
         },
+        editItem2:function() {
+            alert("Bệnh nhân này chưa có lịch sử bệnh án");
+            },
+
+       
         setList: function (item) {
             const index = [...this.list].findIndex(dt => Number(dt.idbooklist_main) === Number(item.idbooklist_main));
             if (index !== -1) {

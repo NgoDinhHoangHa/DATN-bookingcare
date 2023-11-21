@@ -56,7 +56,4 @@ class C_time_book extends Controller
             'status' => true
         ]);
     }
-    public function addBook()
-    {
-    }
 }

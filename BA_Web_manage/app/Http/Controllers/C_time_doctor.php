@@ -54,7 +54,4 @@ class C_time_doctor extends Controller
         m_time_doctors.year = ? ', [$request->day, $request->month, $request->year]);
         return response()->json(['data' => $result]);
     }
-    public function find()
-    {
-    }
 }
