@@ -14,7 +14,7 @@ class C_book_list extends Controller
     as 'phone_main', m_book_lists.email as 'email_main' , m_book_lists.created_at as 'created_at_main' ,
     m__admins.name as 'name_doctor' , m_info_admins.avatar as 'avatar_doctor' , m_book_lists.gender as 'gender_main' ,
     m_users.avatar as 'avatar_user' , m_book_lists.address as 'address_main' , m_book_lists.id as 'idbooklist_main',
-    m_book_lists.status as 'status_book_list' FROM m_book_lists INNER JOIN m__admins 
+    m_book_lists.status as 'status_book_list' ,m_book_lists.description as 'reason_main' FROM m_book_lists INNER JOIN m__admins 
     ON m_book_lists.iddoctor = m__admins.id INNER JOIN m_info_admins ON 
     m_info_admins.idadmin = m__admins.id INNER JOIN m_specical_lists ON 
     m_specical_lists.id = m_info_admins.idspecicallist INNER JOIN m_time_books ON 

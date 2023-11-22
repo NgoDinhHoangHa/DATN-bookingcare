@@ -1,6 +1,4 @@
 <template>
-  
-      
     <Base :onInput="onInput" :optional="[
         { id: 'all', name: 'Tất cả', color: 'black', value: null },
         { id: 1, name: 'Đã huỷ', color: 'gray', value: -1 },
@@ -9,8 +7,8 @@
         { id: 4, name: 'Đã khám', color: 'var(--color-bold)', value: 2 },
         { id: 5, name: 'Đã phản hồi', color: 'orange', value: 3 },
     ]" :handleOptional="(item) => { this.optionalActive = item }" :optionalActive="optionalActive">
-    <Table :hideCrud="true" :title="'Danh sách lịch đặt khám'" :heading="['Tên khách hàng', 'Số điện thoại', 'Email', 'Tên bác sĩ', 'Giờ khám',
-    'Ngày khám', 'Thời gian đặt', 'Tình trạng', 'Sửa','Lịch sử bệnh án']" :list="list" :loading="loading">
+    <Table :hideCrud="true" :title="'Danh sách lịch đặt khám'" :heading="['Tên khách hàng', 'Số điện thoại', 'Lí do khám', 'Tên bác sĩ', 'Giờ khám',
+    'Ngày khám', 'Thời gian đặt', 'Tình trạng', 'Sửa']" :list="list" :loading="loading">
         <tr v-for="(item, index) in (
             optionalActive.id === 'all' ? list : list.filter(dt => dt.status_book_list == optionalActive.value)
         )" :key="item.id">
@@ -22,7 +20,7 @@
                 {{ item.phone_main }}
             </td>
             <td>
-                {{ item.email_main }}
+                {{ item.reason_main }}
             </td>
             <td>
                 {{ item.name_doctor }}
@@ -42,8 +40,6 @@
             <td>
                 <span @click="editItem(item.idbooklist_main, item.status_book_list)" class="bx bx-pencil"
                     :class="item.status_book_list === -1 || item.status_book_list === 2 || item.status_book_list === 3 ? 'disabled' : ''"></span>
-            </td>            <td>
-                <span @click="editItem2()" class="bx bx-show"></span>
             </td>
         </tr>
     </Table>
