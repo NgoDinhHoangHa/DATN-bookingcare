@@ -27,7 +27,7 @@
                 placeholder="Nhập họ và tên" :errorMessage="fullname.error ? 'Họ tên không được trống' : ''"
                 :value="fullname.value">
             </InputComponent>
-            <p class="order__form--desc">Hãy ghi rõ Họ Và Tên, viết hoa những chữ cái đầu tiên, ví dụ: Trần Văn Phú
+            <p class="order__form--desc">Hãy ghi rõ Họ Và Tên, viết hoa những chữ cái đầu tiên, ví dụ: Nguyễn Văn A
             </p>
             <div class="order__form--for">
                 <div>
@@ -79,7 +79,7 @@
                         vui
                         lòng lưu ý:</li>
                     <ul>
-                        <li>Ghi rõ họ và tên, viết hoa những chữ cái đầu tiên, ví dụ: Trần Văn Phú </li>
+                        <li>Ghi rõ họ và tên, viết hoa những chữ cái đầu tiên, ví dụ: Nguyễn Văn A </li>
                         <li>Điền đầy đủ, đúng và kiểm tra lại thông tin trước khi ấn "Xác nhận đặt khám"</li>
                     </ul>
                     <li>Tuân thủ quy định phòng chống dịch (đeo khẩu trang, khử khuẩn, khai báo dịch tễ) khi đến

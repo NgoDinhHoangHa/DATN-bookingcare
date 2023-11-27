@@ -37,7 +37,8 @@ export default {
 </script>
 <style scoped>
     table {
-        border-collapse: separate;
+        border: 1px solid #C6E2FF;
+        border-collapse: collapse;
         width: 100%;
         color: #333;
         font-family: Arial, sans-serif;
@@ -54,10 +55,10 @@ export default {
         color: #fff;
         font-weight: 500;
         padding: 10px;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        border-top: 2px solid #fff;
-        border-bottom: 2px solid #ccc;
+        text-transform: capitalize;
+        letter-spacing: 1px;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #ccc;
     }
     table tr:nth-child(even) td {
         background-color: #f2f2f2;
@@ -70,6 +71,6 @@ export default {
         background-color: #fff;
         padding: 10px;
         border-bottom: 1px solid #ccc;
-        font-weight: bold;
+        font-weight: 500;
     }
 </style>

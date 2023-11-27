@@ -161,18 +161,26 @@ export default {
 <style scoped>
     table{
         border-collapse: collapse;
+        border:1px solid #868585;
         width: 100%;
         color: #333;
         font-size: 14px;
         text-align: left;
-        border-radius: 20px;
+        border-radius: 40px;
         overflow: hidden;
         margin: auto;
         margin-top: 50px;
         margin-bottom: 50px;
     }
-    table tr {
-        border-radius: 20px;
+    table th {
+        background-color: #C6E2FF;
+        color: #fff;
+        font-weight: 500;
+        padding: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #ccc;
     }
     table tr:nth-child(even) td {
         background-color: #f2f2f2;
