@@ -7,7 +7,7 @@
         { id: 4, name: 'Đã khám', color: 'var(--color-bold)', value: 2 },
         { id: 5, name: 'Đã phản hồi', color: 'orange', value: 3 },
     ]" :handleOptional="(item) => { this.optionalActive = item }" :optionalActive="optionalActive">
-    <Table :hideCrud="true" :title="'Danh sách lịch đặt khám'" :heading="['Tên khách hàng', 'Số điện thoại', 'Lí do khám', 'Tên bác sĩ', 'Giờ khám',
+    <Table style="border-radius: 20px;" :hideCrud="true" :title="'Danh sách lịch đặt khám'" :heading="['Tên khách hàng', 'Số điện thoại', 'Lí do khám', 'Tên bác sĩ', 'Giờ khám',
     'Ngày khám', 'Thời gian đặt', 'Tình trạng', 'Sửa']" :list="list" :loading="loading">
         <tr v-for="(item, index) in (
             optionalActive.id === 'all' ? list : list.filter(dt => dt.status_book_list == optionalActive.value)
@@ -158,3 +158,32 @@ export default {
     }
 }
 </script>
+<style scoped>
+    table{
+        border-collapse: collapse;
+        width: 100%;
+        color: #333;
+        font-size: 14px;
+        text-align: left;
+        border-radius: 20px;
+        overflow: hidden;
+        margin: auto;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+    table tr {
+        border-radius: 20px;
+    }
+    table tr:nth-child(even) td {
+        background-color: #f2f2f2;
+    } 
+    table tr:hover td {
+    background-color: #E8E8E8;
+    }
+    table td {
+        background-color: #fff;
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+        font-weight: 500;
+    }
+</style>

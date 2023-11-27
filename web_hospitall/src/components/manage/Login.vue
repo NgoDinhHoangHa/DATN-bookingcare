@@ -3,7 +3,7 @@
 	<div class="container">
 		<Loading v-if="load"></Loading>
 		<div class="header">
-			<h1> ĐĂNG NHẬP TRANG QUẢN LÝ</h1>
+			<h1> ĐĂNG NHẬP </h1>
 		</div>
 		<div class="screen">
 			<div class="screen__content">

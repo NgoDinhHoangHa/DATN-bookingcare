@@ -1,11 +1,11 @@
 <template>
     <Base :onInput="onInput">
-    <Table :loading="loading" :title="'Danh sáchh bác sĩ'" :list="list" :length="'8'"
-        :heading="['Ảnh đại diện', 'Số điện thoại ', 'Chuyên khoa', 'Họ tên', 'Tên đăng nhập']">
+    <Table :loading="loading" :title="'Danh sách bác sĩ'" :list="list" :length="'8'"
+        :heading="['Ảnh đại diện', 'Số điện thoại ', 'Chuyên khoa', 'Họ tên', 'Tên đăng nhập']" >
         <tr v-for="(item, key) in list" :key="item.id">
             <td>{{ key + 1 }}</td>
             <td><img :src="urlImage + item.avatar"
-                    style="border-radius:100rem;width: 10rem;height:10rem;object-fit: cover;" alt="" srcset="">
+                    style="border-radius:100rem;width: 6rem;height:6rem;object-fit: cover;" alt="" srcset="">
             </td>
             <td>{{ item.sdt }}</td>
             <td>{{ item.namespecical }}</td>
@@ -114,3 +114,41 @@ export default {
     }
 }
 </script>
+<style scoped>
+    table{
+        border-collapse: collapse;
+        width: 100%;
+        color: #333;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        text-align: left;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        margin: auto;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+    table th {
+        background-color: #ff9800;
+        color: #fff;
+        font-weight: bold;
+        padding: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #ccc;
+    }
+    table tr:nth-child(even) td {
+        background-color: #f2f2f2;
+    } 
+    table tr:hover td {
+    background-color: #E8E8E8;
+    }
+    table td {
+        background-color: #fff;
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+        font-weight: 500;
+    }
+</style>

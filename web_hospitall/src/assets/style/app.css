@@ -670,7 +670,7 @@ input::-webkit-inner-spin-button {
 
 .status.active {
   border: 0.2rem solid royalblue;
-  border-radius: 0 !important;
+  border-radius: 100rem;
 }
 
 .red {
