@@ -120,7 +120,7 @@ select {
 
 :root {
   --color-thin: #ede7f6;
-  --color-bold: #5e35b1;
+  --color-bold: #2ab7f3;
 }
 
 @media all and (max-width: 768px) {
