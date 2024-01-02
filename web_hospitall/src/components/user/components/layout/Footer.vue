@@ -45,15 +45,15 @@
                 <ul>
                     <li>
                         <h4>Trụ sở tại Đà Nẵng</h4>
-                        <p>48 Cao Thắng, TP. Quảng Ngãi</p>
+                        <p>48 Cao Thắng, TP. Đà Nẵng</p>
                     </li>
                     <li>
                         <h4>Trụ sở tại Đà Nẵng</h4>
-                        <p>48 Cao Thắng, TP. Quảng Ngãi</p>
+                        <p>48 Cao Thắng, TP. Đà Nẵng</p>
                     </li>
                     <li>
                         <h4>Trụ sở tại Đà Nẵng</h4>
-                        <p>48 Cao Thắng, TP. Quảng Ngãi</p>
+                        <p>48 Cao Thắng, TP. Đà Nẵng</p>
                     </li>
                 </ul>
             </div>
