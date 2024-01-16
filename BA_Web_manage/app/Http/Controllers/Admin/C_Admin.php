@@ -17,7 +17,8 @@ use Psy\Readline\Hoa\Console;
 
 class C_Admin extends Controller
 {
-    public $stringQueryTimeDoctor = "SELECT * FROM `m_time_doctors` WHERE (m_time_doctors.day >= DAY(NOW()) AND m_time_doctors.month >=  MONTH(NOW()) AND m_time_doctors.year >= YEAR(NOW())) OR (m_time_doctors.day >= 1 AND m_time_doctors.month >=  (MONTH(NOW()) + 1) AND m_time_doctors.year >= YEAR(NOW())) ";
+    public $stringQueryTimeDoctor = "SELECT * FROM `m_time_doctors` WHERE ((m_time_doctors.day >= DAY(NOW()) AND m_time_doctors.month >= MONTH(NOW()) AND m_time_doctors.year >= YEAR(NOW())) OR (m_time_doctors.day >= 1 AND m_time_doctors.month >= (MONTH(NOW()) + 1) AND m_time_doctors.year >= YEAR(NOW()))) AND m_time_doctors.status <> 2";
+    public $stringQueryTimeDoctorOff = "SELECT * FROM `m_time_doctors` WHERE ((m_time_doctors.day >= DAY(NOW()) AND m_time_doctors.month >= MONTH(NOW()) AND m_time_doctors.year >= YEAR(NOW())) OR (m_time_doctors.day >= 1 AND m_time_doctors.month >= (MONTH(NOW()) + 1) AND m_time_doctors.year >= YEAR(NOW()))) AND m_time_doctors.status = 1";
 
     public function register(Rq_resgister $request)
     {
@@ -36,10 +37,6 @@ class C_Admin extends Controller
             'username' => $request->username,
             'password' => $request->password
         ])) {
-            // $result = DB::select("SELECT avatar from m_info_admins INNER JOIN m__admins ON m__admins.id = m_info_admins.idadmin 
-            // WHERE m__admins.username = ? ", [$request->username]);
-            // if (sizeof($result) > 0) {
-            // }
             $Admin = M_Admin::Where('username', '=', $request->username)->first();
             // $Admin->avatar = $result[0]->avatar;
             $Admin->token = $Admin->createToken('Admin', ['admin'])->accessToken;
@@ -87,7 +84,13 @@ class C_Admin extends Controller
         $result = DB::select("SELECT * , m__admins.id as 'idadmin'  FROM m__admins LEFT JOIN m_info_admins ON m__admins.id = 
         m_info_admins.idadmin INNER JOIN m_specical_lists ON  m_info_admins.idspecicallist = m_specical_lists.id 
         WHERE m__admins.role != 0");
-        return response()->json(['data' => $result]);
+        $arrObj = [];
+        foreach ($result as $key => $value) {
+            $dates = DB::select($this->stringQueryTimeDoctorOff . " AND m_time_doctors.idadmin = ? ", [$value->idadmin]);
+            $value->dates = $dates;
+            array_push($arrObj, $value);
+        }
+        return response()->json(['data' => $arrObj]);
     }
 
     public function addDoctor(Request $request)

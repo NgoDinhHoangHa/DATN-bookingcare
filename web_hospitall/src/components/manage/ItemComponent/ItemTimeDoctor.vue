@@ -1,7 +1,7 @@
 <template>
     <div class="select-list">
         <div v-for="item in list" @click="handleClick(item)" :key="item.id" class="item-select" :class="([...currentData].findIndex(dt => dt.day === item.day && dt.month === item.month &&
-        dt.year)) === -1 ? '' : 'active'">
+            dt.year)) === -1 ? '' : 'active'">
             {{ item.name }}
         </div>
     </div>
@@ -9,7 +9,7 @@
 <script>
 
 export default {
-    props: ['setCurrent', 'id', 'currentData'],
+    props: ['setCurrent', 'id', 'currentData', 'off'],
     data() {
         return {
             list: []
@@ -17,17 +17,26 @@ export default {
     },
     methods: {
         handleClick: function (item) {
-            const index = [...this.currentData].findIndex(dt => dt.day === item.day && dt.month === item.month &&
-                dt.year === item.year);
-            if (index !== -1) {
-                let clone = [...this.currentData];
-                clone.splice(index, 1);
-                this.setCurrent(clone);
-            }
-            else {
-                this.setCurrent([...this.currentData, item]);
+            if (this.off) {
+                const isItemExist = this.currentData.some((dt) =>
+                    dt.day === item.day && dt.month === item.month && dt.year === item.year
+                );
+                if (!isItemExist) {
+                    this.setCurrent([...this.currentData, item]);
+                }
+            } else {
+                const index = [...this.currentData].findIndex(dt => dt.day === item.day && dt.month === item.month &&
+                    dt.year === item.year);
+                if (index !== -1) {
+                    let clone = [...this.currentData];
+                    clone.splice(index, 1);
+                    this.setCurrent(clone);
+                } else {
+                    this.setCurrent([...this.currentData, item]);
+                }
             }
         }
+
     },
     mounted() {
         (() => {

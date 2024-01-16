@@ -31,6 +31,7 @@ class C_time_doctor extends Controller
         $mTimeDoctor->month = $request->month;
         $mTimeDoctor->year = $request->year;
         $mTimeDoctor->name = $request->name;
+        $mTimeDoctor->status = 0;
         $mTimeDoctor->save();
         return response()->json(['data' => $mTimeDoctor]);
     }
@@ -42,9 +43,19 @@ class C_time_doctor extends Controller
             'day' => $request->day,
             'month' => $request->month,
             'year' => $request->year,
-            'name' => $request->name
+            'name' => $request->name,
+            'status' => $request->status,
         ]);
         $result = DB::select("SELECT * FROM m_time_doctors WHERE id = ? ", [$request->id]);
+        return response()->json(['data' => sizeof($result) === 0 ? null : $result[0]]);
+    }
+
+    public function acceptScheduleOff(Request $request)
+    {
+        DB::table('m_time_doctors')->where('name', $request->name)->update([
+            'status' => $request->status,
+        ]);
+        $result = DB::select("SELECT * FROM m_time_doctors WHERE `name` = ? ", [$request->name]);
         return response()->json(['data' => sizeof($result) === 0 ? null : $result[0]]);
     }
 

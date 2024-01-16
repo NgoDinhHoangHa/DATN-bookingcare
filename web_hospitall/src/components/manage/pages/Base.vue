@@ -17,11 +17,11 @@
                                 </span>
                             </div>
                             <ul>
-                                <li v-if="this.$route.name !== 'booklists' && this.$route.name !== 'users'"
+                                <li v-if="this.$route.name !== 'booklists' && this.$route.name !== 'users' && this.$route.name !== 'schedule'"
                                     @click="openModal()" class="orange">Thêm
                                 </li>
                             </ul>
-                            <input type="text" placeholder="Tìm kiếm thông tin" @input="onInput($event)">
+                            <input v-if="this.$route.name !== 'schedule'" type="text" placeholder="Tìm kiếm thông tin" @input="onInput($event)">
                         </div>
                         <br />
                         <slot></slot>

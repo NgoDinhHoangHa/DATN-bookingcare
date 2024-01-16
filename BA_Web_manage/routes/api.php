@@ -88,6 +88,7 @@ Route::get('/timedoctors', 'C_time_doctor@getAllTimeDoctor');
 Route::get('/timedoctors/{id}', 'C_time_doctor@getTimeDoctorByIdDoctor');
 Route::post('/timedoctors', 'C_time_doctor@addTimeDoctor');
 Route::put('/timedoctors', 'C_time_doctor@editTimeDoctor');
+Route::put('/timedoctors/schedule_off', 'C_time_doctor@acceptScheduleOff');
 Route::post('/timedoctor-delete', 'C_time_doctor@deleteTimeDoctor');
 
 //blog

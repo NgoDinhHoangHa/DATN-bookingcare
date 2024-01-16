@@ -1,11 +1,11 @@
 <template>
-    <ModalAdmin :onSubmit="onSubmit" :title="'Bác sĩ'" :disabled="edit !== 3 && admin?.role != 0"
+    <ModalAdmin :onSubmit="onSubmit" :title="'Bác sĩ'" :disabled="admin?.role != 1"
         :nameButton="`${id ? 'Sửa' : 'Thêm'} bác sĩ`">
         <div v-if="admin?.role != 0" class="specicallist flex-space-between">
             <label v-if="edit !== 1" class="left-0" @click="writeDescription(edit - 1)" for="">
                 Trở về
             </label>
-            <label v-if="edit !== 3" class="right-0" @click="writeDescription(edit + 1)" for="">
+            <label v-if="edit !== 4" class="right-0" @click="writeDescription(edit + 1)" for="">
                 Tiếp tục
             </label>
         </div>
@@ -67,7 +67,7 @@
             <div class="flex">
                 <div class="w-50">
                     <InputComponent placeholder="Nhập số điện thoại" type="text" icon="bx bx-phone" :errorMessage="!phone.error ? '' : phone.error === 1 ? 'Số điện thoại không được trống' :
-                    'Số điện thoại không đúng định dạng'" :onChange="onChange" name="phone" :value="phone.value">
+                        'Số điện thoại không đúng định dạng'" :onChange="onChange" name="phone" :value="phone.value">
                     </InputComponent>
                 </div>
                 <div class="w-50">
@@ -81,8 +81,7 @@
             <div class="select_admin">
                 <select name="specicallist" v-model="specicallist.value" @change="onChange($event)">
                     <option value=""></option>
-                    <option v-for="special in specicals" :key="special" :value="special.id"
-                        :selected="specicallist.value">
+                    <option v-for="special in specicals" :key="special" :value="special.id" :selected="specicallist.value">
                         {{ special.namespecical }}
                     </option>
                 </select>
@@ -103,7 +102,10 @@
             <VueEditor v-model="description.value" />
         </div>
         <div v-if="edit === 3 && admin?.role == 1">
-            <ItemTimeDoctor :id="id" :setCurrent="setCurrent" :currentData="current" />
+            <ItemTimeDoctor :id="id" :off="false" :setCurrent="setCurrent" :currentData="current" />
+        </div>
+        <div v-if="edit === 4 && admin?.role == 1">
+            <ItemTimeDoctor :id="id" :off="true" :setCurrent="setCurrentOff" :currentData="scheduleOff" />
         </div>
     </ModalAdmin>
 </template>
@@ -172,7 +174,9 @@ export default {
             },
             data: null,
             current: [],
+            scheduleOff: [],
             backupCurrent: [],
+            backupCurrentScheduleOff: [],
             addresses: []
         }
     },
@@ -209,6 +213,9 @@ export default {
         setCurrent: function (list) {
             this.current = list;
         },
+        setCurrentOff: function (list) {
+            this.scheduleOff = list;
+        },
         onSubmit: async function () {
             try {
                 let image;
@@ -236,7 +243,23 @@ export default {
                 });
                 if (this.id) {
                     let dataNew = [];
+                    let dataScheduleOff = [];
                     let dataOld = [];
+                    if (this.edit === 4) {
+                        for (let i = 0; i < this.scheduleOff.length; i++) {
+                            const item = this.scheduleOff[i];
+                            const index = [...this.backupCurrentScheduleOff].findIndex(dt => dt.day === item.day && dt.month === item.month &&
+                                dt.year === item.year);
+                            if (index === -1) {
+                                dataScheduleOff = [...dataScheduleOff, item];
+                            }
+                        }
+                        for (let index = 0; index < this.scheduleOff.length; index++) {
+                            const dataDefaultStatus = dataScheduleOff.map(item => ({ ...item, status: 1 }));
+                            console.log(dataDefaultStatus[index])
+                            await Request.Put('/timedoctors/schedule_off', { ...dataDefaultStatus[index] });
+                        }
+                    }
                     for (let i = 0; i < this.backupCurrent.length; i++) {
                         const item = this.backupCurrent[i];
                         const index = [...this.current].findIndex(dt => dt.day === item.day && dt.month === item.month &&
@@ -261,8 +284,15 @@ export default {
                     }
                 }
                 else {
-                    for (let index = 0; index < this.current.length; index++) {
-                        await Request.Post('/timedoctors', { ...this.current[index], idadmin: doctor.data.data.idadmin });
+                    if (this.edit === 4) {
+                        for (let index = 0; index < this.scheduleOff.length; index++) {
+                            const dataScheduleOff = this.scheduleOff.map(item => ({ ...item, status: 1 }));
+                            await Request.Put('/timedoctors/schedule_off', { ...dataScheduleOff[index] });
+                        }
+                    } else {
+                        for (let index = 0; index < this.current.length; index++) {
+                            await Request.Post('/timedoctors', { ...this.current[index], idadmin: doctor.data.data.idadmin });
+                        }
                     }
                 }
                 this.setList && this.setList(doctor.data.data);
@@ -297,6 +327,8 @@ export default {
                     this.description.value = data.info.description_admin;
                 }
                 result = await Request.Get(`/timedoctors/${this.id}`);
+                this.scheduleOff = result.data.data.filter(item => item.status === 1)
+                this.backupCurrentScheduleOff = result.data.data.filter(item => item.status === 1)
                 this.current = result.data.data;
                 this.backupCurrent = (result.data.data);
                 result = await Request.Get('/provinces');
