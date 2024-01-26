@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class C_book_list extends Controller
 {
 
-    public $queryDefault = "SELECT * , m_book_lists.fullname as 'fullname_main' , m_book_lists.phone 
+    public $queryDefault = "SELECT * , m_book_lists.fullname as 'fullname_main', m_book_lists.result as 'result' , m_book_lists.phone 
     as 'phone_main', m_book_lists.email as 'email_main' , m_book_lists.created_at as 'created_at_main' ,
     m__admins.name as 'name_doctor' , m_info_admins.avatar as 'avatar_doctor' , m_book_lists.gender as 'gender_main' ,
     m_users.avatar as 'avatar_user' , m_book_lists.address as 'address_main' , m_book_lists.id as 'idbooklist_main',
@@ -71,7 +71,7 @@ class C_book_list extends Controller
         $mBookList->idtimebook = $request->idtimebook;
         $mBookList->dayofweek = $utils->getWeekdayMain();
         $mBookList->iduser = $request->iduser;
-        $mBookList->price = 0;
+        $mBookList->price = $request->price;
         $mBookList->fullname = $request->fullname;
         $mBookList->gender = $request->gender;
         $mBookList->phone = $request->phone;

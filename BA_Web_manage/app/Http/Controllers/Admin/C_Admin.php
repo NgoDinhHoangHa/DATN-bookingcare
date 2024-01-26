@@ -30,6 +30,7 @@ class C_Admin extends Controller
 
         return response()->json($admin);
     }
+ 
 
     public function login(Rq_Admin_login $request)
     {
@@ -38,7 +39,6 @@ class C_Admin extends Controller
             'password' => $request->password
         ])) {
             $Admin = M_Admin::Where('username', '=', $request->username)->first();
-            // $Admin->avatar = $result[0]->avatar;
             $Admin->token = $Admin->createToken('Admin', ['admin'])->accessToken;
             return response()->json($Admin);
         } {

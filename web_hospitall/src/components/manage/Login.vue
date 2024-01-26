@@ -92,18 +92,6 @@ export default {
 				this.errors.password = error.response.data.errors.password?.[0];
 
 			}
-			// Request.login('/admin-login',this.account)
-			// .then(response => {
-			// 	window.localStorage.setItem('token', response.data.token);
-			// 	this.$router.push({name:'manage'})
-			// 	this.loading = false;
-			// })
-			// .catch(er =>{
-			// 	if(!er.response){
-			// 		console.log('bug')
-			// 	}
-			// 	console.log(er)
-			// })
 		},
 	}
 }

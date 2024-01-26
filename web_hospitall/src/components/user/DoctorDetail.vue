@@ -22,7 +22,12 @@
                         <div class="order__item--left--content--footer">
                             <span class="bx bx-current-location"></span>
                             <span>{{ book.doctor.info.address }}</span>
+                            
                         </div>
+                        <div class="order__item--left--content--footer">
+                            <span>Phí khám: 500.000vnđ</span>
+                        </div>
+                        
                         <div class="post__socical">
                             <button>
                                 <span class="bx bxs-like"></span>
@@ -43,8 +48,8 @@
                     <div class="" style="flex: 1;flex-wrap: wrap;">
                         <ul class="col-12">
                             <li>ĐỊA CHỈ KHÁM BỆNH</li>
-                            <li>Bệnh viện Đa Khoa Quận Hải Châu</li>
-                            <li>38 Cao Thắng, Hải Châu, TP Đà Nẵng</li>
+                            <li>Phòng Khám BookingCare</li>
+                            <li>48 Cao Thắng, Hải Châu, TP Đà Nẵng</li>
                         </ul>
                     </div>
                 </div>

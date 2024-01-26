@@ -32,6 +32,6 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('MH CARE')->view($this->view);
+        return $this->subject('BookingCare')->view($this->view);
     }
 }

@@ -8,7 +8,7 @@
         { id: 5, name: 'Đã phản hồi', color: 'orange', value: 3 },
     ]" :handleOptional="(item) => { this.optionalActive = item }" :optionalActive="optionalActive">
     <Table style="border-radius: 20px;" :hideCrud="true" :title="'Danh sách lịch đặt khám'" :heading="['Tên khách hàng', 'Số điện thoại', 'Lí do khám', 'Tên bác sĩ', 'Giờ khám',
-    'Ngày khám', 'Thời gian đặt', 'Tình trạng', 'Sửa']" :list="list" :loading="loading">
+        'Ngày khám', 'Thời gian đặt', 'Tình trạng', 'KQ khám', 'Sửa']" :list="list" :loading="loading">
         <tr v-for="(item, index) in (
             optionalActive.id === 'all' ? list : list.filter(dt => dt.status_book_list == optionalActive.value)
         )" :key="item.id">
@@ -38,19 +38,26 @@
                 <ItemStatus :statusMain="item.status_book_list" :isAdmin="true"></ItemStatus>
             </td>
             <td>
+                <span @click="resultItem(item.fullname_main, item.status_book_list, item.reason_main, item.result, item.price, item.time)" class="bx bx-file"
+                    :class="item.status_book_list === 4 || item.status_book_list === 2 || item.status_book_list === 3 ? '' : 'disabled'"></span>
+            </td>
+            <td>
                 <span @click="editItem(item.idbooklist_main, item.status_book_list)" class="bx bx-pencil"
                     :class="item.status_book_list === -1 || item.status_book_list === 2 || item.status_book_list === 3 ? 'disabled' : ''"></span>
             </td>
         </tr>
     </Table>
-    <ModalOptionData v-if="modal.data" :list="[{ id: -1, name: 'Huỷ lịch', status: -1, hide: status == -1 || status == 1 },
+    <ModalOptionData v-if="modal.data && modal.type === 'option'" :list="[{ id: -1, name: 'Huỷ lịch', status: -1, hide: status == -1 || status == 1 },
     { id: 1, name: 'Duyệt lịch', status: 1, hide: status == 1 },
-    { id: 2, name: 'Đã khám', status: 2, hide: status == 0 }]" table="booklist" :setList="setList"
-        name="booklist-status" title="Lịch đặt khám" :id="id" :status="status">
+    { id: 2, name: 'Đã khám', status: 2, hide: status == 0 }, { id: 3, name: 'Huỷ', status: -1, hide: status == 0 }]"
+        table="booklist" :setList="setList" name="booklist-status" title="Lịch đặt khám" :id="id" :status="status">
     </ModalOptionData>
-   
-   
-   
+    <ModalResult v-if="modal.data && modal.type === 'result'" :list="[]" :table="modal.table" :setList="setList"
+        :name="modal.name" :title="'Kết quả khám'" :id="id" :status="status" :key="modal.type" :nameProp="modal.name"
+        :reasonProp="modal.reason" :resultProp="modal.result" :priceProp="modal.price" :timeProp="modal.time">
+        {{ modal.data && modal.type === 'result' ? 'ModalResult Hiển thị' : 'ModalResult Ẩn' }}
+    </ModalResult>
+
     </Base>
 </template>
 <script>
@@ -61,12 +68,14 @@ import ItemStatus from '../../user/components/ItemComponent/ItemStatus.vue';
 import Request from "../../../Request";
 import ModalOptionData from "../modal/ModalOptionData.vue";
 import { mapMutations, mapState } from "vuex";
+import ModalResult from "../modal/ModalResult.vue";
 export default {
     components: {
         Base,
         Table,
         ItemStatus,
-        ModalOptionData
+        ModalOptionData,
+        ModalResult
     },
     computed: {
         ...mapState(['modal', 'admin'])
@@ -95,14 +104,21 @@ export default {
             this.id = id;
             if (status !== -1 && status !== 2 && status !== 3) {
                 this.status = status;
-                this.setModal({ ...this.modal, data: true })
+                this.setModal({ ...this.modal, data: true, type: 'option' })
             }
         },
-        editItem2:function() {
+        resultItem: function (name, status, reason, result, price, time) {
+            console.log(price)
+            if (status !== -1 && status !== 4 && status !== 3) {
+                this.status = status;
+                this.setModal({ ...this.modal, data: true, reason: reason, name: name, type: 'result', result: result, price: price, time: time })
+            }
+        },
+        editItem2: function () {
             alert("Bệnh nhân này chưa có lịch sử bệnh án");
-            },
+        },
 
-       
+
         setList: function (item) {
             const index = [...this.list].findIndex(dt => Number(dt.idbooklist_main) === Number(item.idbooklist_main));
             if (index !== -1) {
@@ -159,39 +175,43 @@ export default {
 }
 </script>
 <style scoped>
-    table{
-        border-collapse: collapse;
-        border:1px solid #868585;
-        width: 100%;
-        color: #333;
-        font-size: 14px;
-        text-align: left;
-        border-radius: 40px;
-        overflow: hidden;
-        margin: auto;
-        margin-top: 50px;
-        margin-bottom: 50px;
-    }
-    table th {
-        background-color: #C6E2FF;
-        color: #fff;
-        font-weight: 500;
-        padding: 10px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        border-top: 1px solid #fff;
-        border-bottom: 1px solid #ccc;
-    }
-    table tr:nth-child(even) td {
-        background-color: #f2f2f2;
-    } 
-    table tr:hover td {
+table {
+    border-collapse: collapse;
+    border: 1px solid #868585;
+    width: 100%;
+    color: #333;
+    font-size: 14px;
+    text-align: left;
+    border-radius: 40px;
+    overflow: hidden;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+table th {
+    background-color: #C6E2FF;
+    color: #fff;
+    font-weight: 500;
+    padding: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #ccc;
+}
+
+table tr:nth-child(even) td {
+    background-color: #f2f2f2;
+}
+
+table tr:hover td {
     background-color: #E8E8E8;
-    }
-    table td {
-        background-color: #fff;
-        padding: 10px;
-        border-bottom: 1px solid #ccc;
-        font-weight: 500;
-    }
+}
+
+table td {
+    background-color: #fff;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    font-weight: 500;
+}
 </style>

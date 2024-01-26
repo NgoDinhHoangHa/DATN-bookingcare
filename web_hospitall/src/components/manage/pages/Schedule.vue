@@ -1,7 +1,7 @@
 <template>
     <Base :onInput="onInput">
     <Table :loading="loading" :title="'Danh sách đăng ký nghỉ'" :list="list" :length="'8'"
-        :heading="['Ảnh đại diện', 'Chuyên khoa', 'Họ tên', 'Ngày đăng ký nghỉ', 'Duyệt']" :hideCrud="true">
+        :heading="['Ảnh đại diện', 'Chuyên khoa', 'Họ tên', 'Ngày đăng ký nghỉ', 'Duyệt', 'Từ chối']" :hideCrud="true">
         <tr v-for="(item, key) in list" :key="item.id">
             <td>{{ key + 1 }}</td>
             <td><img :src="urlImage + item.avatar" style="border-radius:100rem;width: 6rem;height:6rem;object-fit: cover;"
@@ -19,7 +19,12 @@
             </td>
             <td>
                 <span @click="acceptItem(item.dates)"
-                    :class="`bx bx-${loadingColumn === item.id ? 'loader loading' : 'check'}`"></span>
+                    :class="`bx bx-${loadingColumn === item.id ? 'loader loading' : 'check'}`"
+                    style="font-size: 2em;"></span>
+            </td>
+            <td>
+                <span @click="refuseItem(item.dates)"
+                    :class="`bx bx-${loadingColumn === item.id ? 'loader loading' : 'x'}`" style="font-size: 2em;"></span>
             </td>
         </tr>
     </Table>
@@ -74,6 +79,19 @@ export default {
                 alert(error);
             }
         },
+
+        refuseItem: async function (dates) {
+            try {
+                for (let index = 0; index < dates.length; index++) {
+                    await Request.Put('/timedoctors', { ...dates[index], status: 0 });
+                }
+                this.fetchData();
+                this.loadingColumn = -1;
+            } catch (error) {
+                alert(error);
+            }
+        },
+
         fetchData: async function () {
             try {
                 const result = await Request.Get("/doctor-admin");

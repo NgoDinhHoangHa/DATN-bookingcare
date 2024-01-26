@@ -1,13 +1,12 @@
 <template>
-    <ModalAdmin :onSubmit="onSubmit" :title="'Bác sĩ'" :disabled="admin?.role != 1"
-        :nameButton="`${id ? 'Sửa' : 'Thêm'} bác sĩ`">
-        <div v-if="admin?.role != 0" class="specicallist flex-space-between">
-            <label v-if="edit !== 1" class="left-0" @click="writeDescription(edit - 1)" for="">
-                Trở về
-            </label>
-            <label v-if="edit !== 4" class="right-0" @click="writeDescription(edit + 1)" for="">
-                Tiếp tục
-            </label>
+    <ModalAdmin :onSubmit="onSubmit" :title="getModalTitle(edit)" :disabled="admin?.role != 1"
+        :nameButton="`${id ? 'Cập nhật' : 'Thêm'}`">
+        <div v-if="admin?.role != 0" class="specicallist flex-space-between" style="width: 100%;">
+            <span v-if="edit !== 1" @click="writeDescription(edit - 1)" class="bx bx-chevron-left left-0"
+                style="font-size: 2em; cursor: pointer;"></span>
+            <div v-if="edit !== 4"></div>
+            <span v-if="edit !== 4" @click="writeDescription(edit + 1)" class="bx bx-chevron-right right-0"
+                style="font-size: 2em; cursor: pointer;"></span>
         </div>
         <br />
         <div v-if="edit === 1">
@@ -187,6 +186,20 @@ export default {
         },
         writeDescription: function (edit) {
             this.edit = edit;
+        },
+        getModalTitle(edit) {
+            switch (edit) {
+                case 1:
+                    return 'Bác sĩ';
+                case 2:
+                    return 'Bác sĩ';
+                case 3:
+                    return 'Lịch làm việc';
+                case 4:
+                    return 'Lịch nghỉ';
+                default:
+                    return '';
+            }
         },
         onChange: function (event) {
             this[event.target.name].value = event.target.value;

@@ -8,7 +8,7 @@
                     <p>{{ book.doctor.info.position }} {{ book.doctor.info.name }}</p>
                     <p>{{ book.time.time }} - {{ book.date.dayofweek === 0 ? "Chủ nhật" : `Thứ
                                             ${book.date.dayofweek + 1}`
-                    }} - {{ book.date.day }}/{{ book.date.month }}/2022</p>
+                    }} - {{ book.date.day }}/{{ book.date.month }}/2024</p>
                 </div>
             </div>
             <div class="order__form--for">
